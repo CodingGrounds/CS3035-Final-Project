@@ -23,11 +23,11 @@ public class Model {
 		ObservableList<Column> observableList = (ObservableList<Column>) FXCollections.observableArrayList(list);
 		columnListProperty = new SimpleListProperty<Column>(observableList);
 		
-		// TODO: if existing board, load columns/cards
+		// TODO: if existing BoardSchema.sql, load columns/cards
 		
 		// TODO: clicking save from the menu will load/update the model to the DB
 		
-		// Generate new board, if no existing boards
+		// Generate new BoardSchema.sql, if no existing boards
 		for (int i = 0; i < 5; i++) {
 			// One active column by default
 			if (i == 0) addColumn(true);
