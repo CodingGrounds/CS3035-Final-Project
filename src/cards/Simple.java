@@ -1,4 +1,4 @@
-package data;
+package cards;
 
 public class Simple extends Todo {
 

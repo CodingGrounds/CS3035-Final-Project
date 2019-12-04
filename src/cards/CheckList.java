@@ -1,4 +1,4 @@
-package data;
+package cards;
 
 public class CheckList extends Todo {
 

@@ -1,4 +1,4 @@
-package data;
+package cards;
 
 import java.io.Serializable;
 
