@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS todo(
-  id INTEGER PRIMARY KEY,
-  object BLOB NOT NULL,
-  categoryId INTEGER NOT NULL,
-  FOREIGN KEY(categoryId) REFERENCES category(id)
-);

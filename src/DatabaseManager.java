@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class DatabaseManager {
 
@@ -21,27 +19,58 @@ public class DatabaseManager {
     try {
       Class.forName("org.sqlite.JDBC");
       connection = DriverManager.getConnection("jdbc:sqlite:todo");
+
+      if (!checkTable(connection)) {
+        System.out.println("Database does not have Table board");
+        System.out.println("Creating new table....");
+        createTable(connection);
+      }
     } catch (Exception e) {
       System.out.println(e);
     }
+
     return connection;
   }
 
-  //TODO Create tables
+  /*
+   * Method for checking if a board table exists inside Database
+   */
+  private boolean checkTable(Connection connection) throws Exception {
+    String sql = "SELECT name FROM sqlite_master WHERE name='board'";
 
-  //TODO Object
+    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    boolean result = false;
+    while (resultSet.next()) {
+      result = true;
+    }
+    return result;
+  }
 
+  /*
+   * Creates table board if it does not exist.
+   */
+  public boolean createTable(Connection connection) throws Exception {
+    String sql = "CREATE TABLE IF NOT EXISTS board(id INTEGER PRIMARY KEY, object BLOB NOT NULL);";
+
+    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    int result = preparedStatement.executeUpdate();
+    if(result == 1){
+      return true;
+    }
+    return false;
+  }
 
   /*
    * Method for Creating or Updating new Boards
-   * TODO Requires a Board Object
+   * Idea based on Array Index
    */
   public boolean createOrUpdateBoard(int id, Board object) {
     String sql = "INSERT OR REPLACE INTO board(id, object) VALUES(?, ?)";
     boolean result = false;
 
     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-    ObjectOutput out = null;
+    ObjectOutput out;
 
     //Closes Connection
     try (Connection conn = connect()) {
@@ -64,24 +93,19 @@ public class DatabaseManager {
       try {
         bos.close();
       } catch (IOException ex) {
-        System.out.println("Crap");
+        System.out.println("IOException: " + ex);
       }
     }
     return result;
   }
 
-
   /*
    * Method for Creating or Updating new Boards
-   * TODO Requires a Board Object
    */
   public Board[] getBoards() {
-    String sql = "select * from board";
+    String sql = "SELECT * FROM board";
 
-    ResultSet resultSet = null;
-
-
-
+    ResultSet resultSet;
     ArrayList<byte[]> list = new ArrayList<>();
     int count = 0;
     //Closes Connection
@@ -89,7 +113,7 @@ public class DatabaseManager {
       PreparedStatement preparedStatement = conn.prepareStatement(sql);
       resultSet = preparedStatement.executeQuery();
 
-      while(resultSet.next()){
+      while (resultSet.next()) {
         list.add(resultSet.getBytes(2));
         count++;
       }
@@ -100,20 +124,18 @@ public class DatabaseManager {
     Board[] result = new Board[count];
 
     int listCounter = 0;
-    for(byte[] bytes: list){
+    for (byte[] bytes : list) {
       ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
       ObjectInput in = null;
       try {
         in = new ObjectInputStream(bis);
-        Board board  = (Board)in.readObject();
+        Board board = (Board) in.readObject();
         result[listCounter++] = board;
-      } catch(ClassNotFoundException cl){
-        System.out.println(cl);
-      }
-      catch(IOException io){
-        System.out.println(io);
-      }
-      finally {
+      } catch (ClassNotFoundException cl) {
+        System.out.println("ClassNotFound:" + cl);
+      } catch (IOException io) {
+        System.out.println("IOException" + io);
+      } finally {
         try {
           if (in != null) {
             in.close();
@@ -123,20 +145,8 @@ public class DatabaseManager {
         }
       }
     }
-    //TODO Covert Blob to board
     return result;
   }
-
-
-  public boolean addCard(Column column, Card card) throws Exception {
-
-//     Statement statement =  .createStatement();
-
-//     ResultSet resultSet = statement.
-
-    return true;
-  }
-
 
   public static void main(String[] args) {
 
@@ -151,8 +161,8 @@ public class DatabaseManager {
     System.out.println(result2);
 
     System.out.println("---- GetBoards ----");
-    Board[] boards =  databaseManager.getBoards();
-    for(Board board: boards){
+    Board[] boards = databaseManager.getBoards();
+    for (Board board : boards) {
       System.out.println("Board: " + board.toString());
     }
 
