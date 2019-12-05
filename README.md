@@ -1,16 +1,16 @@
-Group Project for UNB CS 3035 Building User Interfaces
+# Group Project for UNB CS 3035 Building User Interfaces
 
-Application Name: 
-Description: 
+### Application Name: Discount Trello  
+###Description: For when you have really tight budget but need a TODO list
 
-Members:
+## Members
 * Jason Cleveland
 * Joshua Laver
 * Jata Maccabe
 * Anthony Tomarchio
 
 
-/** DEV TASKS **/
+### DEV TASKS
 
 - Application name / description
 - Saving/loading board information (board name, cols, and cards associated with each col)
