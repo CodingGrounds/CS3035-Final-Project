@@ -28,7 +28,7 @@ public class Main extends Application {
       // Set scene
       mainScene = new Scene(splashView, 800, 600);
 
-      primaryStage.setTitle("Bargain Basement Trello");
+      primaryStage.setTitle("Work In Progress");
       primaryStage.setScene(mainScene);
       primaryStage.setMaximized(true);
       primaryStage.show();
@@ -40,6 +40,12 @@ public class Main extends Application {
 
   public static void main(String[] args) {
     launch(args);
+  }
+
+  @Override
+  public void stop(){
+    System.out.println("Stage is closing");
+    model.saveBoards();
   }
 
 }

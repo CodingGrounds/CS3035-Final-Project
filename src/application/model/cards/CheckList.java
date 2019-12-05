@@ -20,6 +20,11 @@ public class CheckList extends Card {
     return this.checkList;
   }
 
+  public void setCheckList(List<String> checkList){
+    this.checkList.clear();
+    this.checkList.addAll(checkList);
+  }
+
   public static Card convertToCheckList(CheckListData input){
     return new CheckList(input.title(), input.getCheckList());
   }
