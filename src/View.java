@@ -47,17 +47,17 @@ public class View extends Pane {
 		h.setPrefHeight(900);
 		h.setAlignment(Pos.CENTER);
 		
-		// Generate Columns	and assign cards
+		// Generate Columns	and assign model.cards
 		for (Column col : Main.model.columnListProperty()) {
 			col.getChildren().clear();
 			
-			// Active columns can have cards added to them
+			// Active columns can have model.cards added to them
 			// They are represented in a different colour
 			if (col.isActive()) {
 				col.setStyle("-fx-background-color: slateblue;");
 				
-				// If there are cards associated with the column (contained in that column's card list)
-				// then add those cards within the column
+				// If there are model.cards associated with the column (contained in that column's card list)
+				// then add those model.cards within the column
 				if (col.cardListProperty().getSize() > 0) {
 					for (Card c : col.cardListProperty()) {
 						col.getChildren().add(c);

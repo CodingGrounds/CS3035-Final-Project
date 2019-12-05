@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 /**
  * This class represents the model for the application. It contains
  * information about how many active columns there are. Those columns
- * contain information about what cards they contain.
+ * contain information about what model.cards they contain.
  * 
  * @author Jason Cleveland
  * @author Joshua Laver
@@ -23,7 +23,7 @@ public class Model {
 		ObservableList<Column> observableList = (ObservableList<Column>) FXCollections.observableArrayList(list);
 		columnListProperty = new SimpleListProperty<Column>(observableList);
 		
-		// TODO: if existing BoardSchema.sql, load columns/cards
+		// TODO: if existing BoardSchema.sql, load columns/model.cards
 		
 		// TODO: clicking save from the menu will load/update the model to the DB
 		

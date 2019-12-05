@@ -1,3 +1,5 @@
+package db;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,7 +13,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Board;
 
+/**
+ * This class represents the db.DatabaseManager for accessing the Database
+ * @author Jason Cleveland
+ * @author Joshua Laver
+ * @author Jata Maccabe
+ * @author Anthony Tomarchio
+ *
+ */
 public class DatabaseManager {
 
   private Connection connect() {
@@ -102,7 +113,7 @@ public class DatabaseManager {
   /*
    * Method for Creating or Updating new Boards
    */
-  public Board[] getBoards() {
+  public ArrayList<Board> getBoards() {
     String sql = "SELECT * FROM board";
 
     ResultSet resultSet;
@@ -121,16 +132,15 @@ public class DatabaseManager {
       System.out.println("ERROR:" + e.getMessage());
     }
 
-    Board[] result = new Board[count];
+    ArrayList<Board> result = new ArrayList<>();
 
-    int listCounter = 0;
     for (byte[] bytes : list) {
       ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
       ObjectInput in = null;
       try {
         in = new ObjectInputStream(bis);
         Board board = (Board) in.readObject();
-        result[listCounter++] = board;
+        result.add(board);
       } catch (ClassNotFoundException cl) {
         System.out.println("ClassNotFound:" + cl);
       } catch (IOException io) {
@@ -152,18 +162,18 @@ public class DatabaseManager {
 
     DatabaseManager databaseManager = new DatabaseManager();
 
-    System.out.println("---- Create Or Update Board  1 -----");
+    System.out.println("---- Create Or Update model.Board  1 -----");
     boolean result1 = databaseManager.createOrUpdateBoard(1, new Board("Fred"));
     System.out.println(result1);
 
-    System.out.println("---- Create Or Update Board  2 -----");
+    System.out.println("---- Create Or Update model.Board  2 -----");
     boolean result2 = databaseManager.createOrUpdateBoard(2, new Board("Jeff"));
     System.out.println(result2);
 
     System.out.println("---- GetBoards ----");
-    Board[] boards = databaseManager.getBoards();
+    ArrayList<Board> boards = databaseManager.getBoards();
     for (Board board : boards) {
-      System.out.println("Board: " + board.toString());
+      System.out.println("model.Board: " + board.toString());
     }
 
   }

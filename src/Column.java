@@ -14,7 +14,7 @@ public class Column extends VBox {
 	public Column (Boolean isActive) {
 		this.isActive = isActive;
 		
-		// List of cards that currently belong to this column
+		// List of model.cards that currently belong to this column
 		ArrayList<Card> list = new ArrayList<Card>();
 		ObservableList<Card> observableList = (ObservableList<Card>) FXCollections.observableArrayList(list);
 		cardListProperty = new SimpleListProperty<Card>(observableList);

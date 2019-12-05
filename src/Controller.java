@@ -1,5 +1,3 @@
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 
 /**
  * This class represents the controller for the application
@@ -13,7 +11,7 @@ public class Controller {
 
 	public Controller() {
 		
-		// TODO: dragging cards from one column to another
+		// TODO: dragging model.cards from one column to another
 		
 	}
 }

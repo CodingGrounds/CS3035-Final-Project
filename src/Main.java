@@ -31,7 +31,7 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     try {
       // Top menu
-      MenuItem save = new MenuItem("Save Board");
+      MenuItem save = new MenuItem("Save model.Board");
       save.setOnAction(e -> {
         e.consume();
         // TODO: SQL to save BoardSchema.sql to database
@@ -69,7 +69,7 @@ public class Main extends Application {
       appName.setPrefWidth(1600);
       appName.setAlignment(Pos.TOP_CENTER);
 
-      Label newBoard = new Label("New Board");
+      Label newBoard = new Label("New model.Board");
       newBoard.setStyle("-fx-font-size: 24px; -fx-cursor: hand");
       newBoard.setPrefHeight(100);
       newBoard.setPrefWidth(1600);
@@ -99,7 +99,7 @@ public class Main extends Application {
       // and create a new Label (or other element) for each
 
       // NOTE: when these elements are clicked on, they need to load our model
-      // with their information that was stored in the DB (# of cols, cards in each col)
+      // with their information that was stored in the DB (# of cols, model.cards in each col)
 
       // If no saved boards, add default message
       Label defaultMsg = new Label("No existing boards");
@@ -110,8 +110,8 @@ public class Main extends Application {
       splashContainer.setStyle("-fx-background-color: lightblue;-fx-text-fill: black;-fx-padding: 10");
       splashContainer.getChildren().addAll(appName, newBoard, existingBoards);
 
-      // Board Name
-      Label boardName = new Label("Board Name");
+      // model.Board Name
+      Label boardName = new Label("model.Board Name");
       boardName.setStyle("-fx-font-size: 40px");
       boardName.setPrefHeight(75);
       boardName.setPrefWidth(1600);
