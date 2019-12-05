@@ -1,6 +1,6 @@
 package model.cards;
 
-
+import db.cards.SimpleData;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Simple extends Card {
@@ -15,5 +15,10 @@ public class Simple extends Card {
   public SimpleStringProperty descriptionProperty(){
     return this.description;
   }
+
+  public static Card convertToSimple(SimpleData input){
+    return new Simple(input.title(), input.getDescription());
+  }
+
 
 }

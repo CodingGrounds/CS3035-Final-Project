@@ -1,9 +1,18 @@
 package model;
 
+import db.BoardData;
 import db.DatabaseManager;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.cards.Bug;
+import model.cards.Card;
+import model.cards.CheckList;
+import model.cards.Event;
+import model.cards.Simple;
+import model.cards.Story;
 
 public class Model {
 
@@ -21,7 +30,12 @@ public class Model {
    * Constructor for Model
    */
   public Model() {
-    ObservableList<Board> observableList = FXCollections.observableArrayList(databaseManager.getBoards());
+    List<BoardData> boardData  = databaseManager.getBoards();
+    ArrayList<Board> boards = new ArrayList<>();
+    for(BoardData boardData1: boardData){
+      boards.add(Board.convertToBoard(boardData1));
+    }
+    ObservableList<Board> observableList = FXCollections.observableArrayList(boards);
     this.boards = new SimpleListProperty<>(observableList);
   }
 
@@ -38,7 +52,7 @@ public class Model {
   public void saveBoards() {
     int counter = 0;
     for(Board board: boards){
-      databaseManager.createOrUpdateBoard(counter++, board);
+      databaseManager.createOrUpdateBoard(counter++, BoardData.convertToBoardData(board));
     }
   }
 
@@ -49,14 +63,38 @@ public class Model {
     System.out.println("----Getting Boards----");
     System.out.println(boards);
 
-    System.out.println("----Adding to the Board----");
-    Board board = new Board("josh");
-    Board board2 = new Board("isaac");
+    Board board = new Board("Board");
+
+    List<String> strings = new ArrayList<>();
+    strings.add("Josh");
+    List<Card> cards = new ArrayList<>();
+
+    board.columnsListProperty().add(new Column("Columns", cards));
+
+    cards.add(new Bug("Bug 1", "B 1", "steps 1"));
+    cards.add(new CheckList("Checklist 1", strings));
+    cards.add(new Event("Event 1", "D 1", "s213132"));
+    cards.add(new Simple("Simple 1", "sim d"));
+    cards.add(new Story("story 1", "d 1", 2, "requirements 1"));
+
+    System.out.print("Board: " + board);
     boards.add(board);
-    boards.add(board2);
+
     model.saveBoards();
-    System.out.println("----Getting Boards----");
-    System.out.println(boards);
+//    Board board = new Board("isaac")
+
+//    Model model = new Model();
+
+//
+//    System.out.println("----Adding to the Board----");
+//    Board board = new Board("isaac");
+//    board.columnListProperty().add(new Column("col1"));
+//    board.columnListProperty().add(new Column("col2"));
+//    boards.add(board);
+////    model.saveBoards();
+//    System.out.println("----Getting Boards----");
+    List<Board> result = model.boardsProperty().get();
+    System.out.println("");
 
   }
 

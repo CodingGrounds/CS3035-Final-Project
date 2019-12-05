@@ -1,6 +1,5 @@
 package model.cards;
 
-import java.io.Serializable;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -11,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Jata Maccabe
  * @author Anthony Tomarchio
  */
-public abstract class Card implements Serializable {
+public abstract class Card {
 
   private SimpleStringProperty title;
 

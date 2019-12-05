@@ -1,9 +1,9 @@
 package model.cards;
 
+import db.cards.EventData;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Event extends Card {
-
 
   private SimpleStringProperty description;
 
@@ -22,5 +22,10 @@ public class Event extends Card {
   public SimpleStringProperty dateProperty(){
     return this.date;
   }
+
+  public static Card convertToEvent(EventData input){
+    return new Event(input.title(), input.getDescription(), input.getDate());
+  }
+
 
 }

@@ -1,11 +1,9 @@
 package model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.lang.reflect.Array;
+import db.BoardData;
+import db.ColumnData;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +16,7 @@ import javafx.collections.ObservableList;
  * @author Jata Maccabe
  * @author Anthony Tomarchio
  */
-public class Board implements Serializable {
+public class Board {
 
   /**
    * Name of the model.Board
@@ -40,6 +38,16 @@ public class Board implements Serializable {
     this.columns = new SimpleListProperty<>(observableList);
   }
 
+  public Board(String name, List<Column> columns){
+    this.name = name;
+    ObservableList<Column> observableList = FXCollections.observableList(columns);
+    this.columns = new SimpleListProperty<>(observableList);
+  }
+
+  public SimpleListProperty<Column> columnsListProperty(){
+    return this.columns;
+  }
+
   /**
    * Override Method for toString
    */
@@ -48,25 +56,16 @@ public class Board implements Serializable {
     return this.name;
   }
 
-  /**
-   *
-   */
-  public SimpleListProperty<Column> columnListProperty() {
-    return this.columns;
+  public String getName() {
+    return this.name;
   }
 
-  private void writeObject(ObjectOutputStream s) throws IOException {
-    s.defaultWriteObject();
-    s.writeObject(columnListProperty().toArray());
+  public static Board convertToBoard(BoardData input){
+    List<ColumnData> columnDataList = input.getColumns();
+    List<Column> columns = new ArrayList<>();
+    for(ColumnData columnData: columnDataList){
+      columns.add(Column.convertToColumn(columnData));
+    }
+    return new Board(input.getName(), columns);
   }
-
-  private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-    this.name = (String) s.readObject();
-    ArrayList<Column> columns = new ArrayList<>();
-    ObservableList<Column> observableList = FXCollections.observableList(columns);
-    this.columns = new SimpleListProperty<>(observableList);
-    System.out.println("help");
-  }
-
-
 }

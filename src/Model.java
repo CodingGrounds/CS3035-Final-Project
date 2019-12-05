@@ -1,3 +1,4 @@
+import db.BoardData;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;

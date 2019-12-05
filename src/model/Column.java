@@ -1,12 +1,24 @@
 package model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import db.ColumnData;
+import db.cards.BugData;
+import db.cards.CardData;
+import db.cards.CheckListData;
+import db.cards.EventData;
+import db.cards.SimpleData;
+import db.cards.StoryData;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.cards.Bug;
 import model.cards.Card;
+import model.cards.CheckList;
+import model.cards.Event;
+import model.cards.Simple;
+import model.cards.Story;
 
 /**
  * This class represents the Column Object which has a name and a List of Cards
@@ -16,7 +28,7 @@ import model.cards.Card;
  * @author Jata Maccabe
  * @author Anthony Tomarchio
  */
-public class Column implements Serializable {
+public class Column {
 
   /**
    * Name of the Column
@@ -26,14 +38,15 @@ public class Column implements Serializable {
   /**
    * List of cards per Column
    */
-//  private SimpleListProperty<Card> cards;
+  private SimpleListProperty<Card> cards;
 
   /**
    * Constructor for Column Input: Names, List<Cards>
    */
-  public Column(SimpleStringProperty name, SimpleListProperty<Card> cards) {
-    this.name = name;
-//    this.cards = cards;
+  public Column(String name, List<Card> cards) {
+    this.name = new SimpleStringProperty(name);
+    ObservableList<Card> observableList = FXCollections.observableList(cards);
+    this.cards = new SimpleListProperty<>(observableList);
   }
 
   /**
@@ -41,7 +54,9 @@ public class Column implements Serializable {
    */
   public Column(String name) {
     this.name = new SimpleStringProperty(name);
-//    this.cards = new SimpleListProperty<>();
+    ArrayList<Card> arrayList = new ArrayList<>();
+    ObservableList<Card> observableList = FXCollections.observableList(arrayList);
+    this.cards = new SimpleListProperty<>(observableList);
   }
 
   /**
@@ -49,9 +64,9 @@ public class Column implements Serializable {
    *
    * @return SimpleListProperty<Card>
    */
-//  public SimpleListProperty<Card> cardProperty() {
-//    return this.cards;
-//  }
+  public SimpleListProperty<Card> cardProperty() {
+    return this.cards;
+  }
 
   /**
    * Method for getting name property
@@ -62,19 +77,32 @@ public class Column implements Serializable {
     return this.name;
   }
 
+  public static Column convertToColumn(ColumnData input){
+    List<Card> cards = new ArrayList<>();
 
-  private void writeObject(ObjectOutputStream s) throws IOException {
-    s.defaultWriteObject();
-    s.writeObject(nameProperty());
-//    s.writeObject();
+    for(CardData cardData: input.getCards()){
+      if(cardData instanceof BugData){
+        System.out.println("Bug Class");
+        cards.add(Bug.convertToBug((BugData)cardData));
+      }
+      else if(cardData instanceof CheckListData){
+        System.out.println("CheckList Class");
+        cards.add(CheckList.convertToCheckList((CheckListData)cardData));
+      }
+      else if(cardData instanceof EventData){
+        System.out.println("Event Class");
+        cards.add(Event.convertToEvent((EventData) cardData));
+      }
+      else if(cardData instanceof SimpleData){
+        System.out.println("Simple Class");
+        cards.add(Simple.convertToSimple((SimpleData) cardData));
+      }
+      else if(cardData instanceof StoryData){
+        System.out.println("Story Class");
+        cards.add(Story.convertToStory((StoryData) cardData));
+      }
+    }
+    return new Column(input.getName(), cards);
   }
-
-
-
-  private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-    String object  = (String) s.readObject();
-    this.name = new SimpleStringProperty(object);
-  }
-
 
 }

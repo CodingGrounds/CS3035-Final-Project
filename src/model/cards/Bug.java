@@ -1,5 +1,6 @@
 package model.cards;
 
+import db.cards.BugData;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Bug extends Card {
@@ -20,6 +21,10 @@ public class Bug extends Card {
 
   public SimpleStringProperty stepsProperty(){
     return this.steps;
+  }
+
+  public static Card convertToBug(BugData input){
+    return new Bug(input.title(), input.getDescription(), input.getSteps());
   }
 
 }

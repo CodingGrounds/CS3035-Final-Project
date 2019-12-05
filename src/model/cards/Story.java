@@ -1,5 +1,6 @@
 package model.cards;
 
+import db.cards.StoryData;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -30,5 +31,8 @@ public class Story extends Card {
     return this.requirements;
   }
 
+  public static Card convertToStory(StoryData input){
+    return new Story(input.title(), input.getDescription(), input.getStoryPoints(), input.getRequirements());
+  }
 
 }
