@@ -30,9 +30,7 @@ public class Model {
 		
 		// Generate new BoardSchema.sql, if no existing boards
 		for (int i = 0; i < 5; i++) {
-			// One active column by default
-			if (i == 0) addColumn(true);
-			else addColumn(false);
+			addColumn();
 		}
 	}
 	
@@ -40,8 +38,8 @@ public class Model {
 		return columnListProperty;
 	}
 	
-	public void addColumn(Boolean isActive) {
-    	Column newColumn = new Column(isActive);
+	public void addColumn() {
+    	Column newColumn = new Column();
 		columnListProperty.add(newColumn);
 	}
 }
