@@ -1,3 +1,6 @@
+package application;
+
+import application.model.cards.Bug;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -7,12 +10,11 @@ import javafx.scene.layout.VBox;
 
 public class ColumnView extends ScrollPane {
 
-    Column column;
+    application.model.Column column;
     VBox cardsContainer = new VBox();
 
-    public ColumnView(Column column) {
+    public ColumnView(application.model.Column column) {
         this.column = column;
-
         setHbarPolicy(ScrollBarPolicy.NEVER);
         setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 
@@ -30,7 +32,8 @@ public class ColumnView extends ScrollPane {
         setMinWidth(200);
         setMinHeight(400);
 
-        for (Card card: column.cardListProperty()) {
+        cardsContainer.getChildren().clear();
+        for (application.model.cards.Card card: column.cardsProperty()) {
             cardsContainer.getChildren().add(new CardView(card));
         }
 
@@ -40,7 +43,9 @@ public class ColumnView extends ScrollPane {
         addCardContainer.setMinHeight(50);
         Label addCard = new Label("+");
         addCard.setOnMouseClicked(event -> {
-            column.addCard(new Card(column));
+            column.cardsProperty().add(new Bug("Bug", "New Bug", "1 2 3"));
+//            column.addCard(new Card(column));
+            draw();
 
         });
         addCardContainer.getChildren().add(addCard);
