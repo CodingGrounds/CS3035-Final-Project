@@ -1,6 +1,7 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -21,7 +22,7 @@ public class SplashView extends BorderPane {
         Label newBoard = new Label("Add Board");
         newBoard.setStyle("-fx-font-size: 24px; -fx-cursor: hand");
         setAlignment(newBoard, Pos.CENTER);
-        newBoard.setPadding(new Insets(0,0,100,0));
+        newBoard.setPadding(new Insets(50,0,50,0));
         newBoard.setOnMouseClicked(e -> {
             // Sets the scene to a new board
             Main.mainScene.setRoot(Main.boardView);
@@ -29,11 +30,12 @@ public class SplashView extends BorderPane {
 
         // TODO: Center these
         VBox existingBoards = new VBox();
+        existingBoards.setFillWidth(true);
+        existingBoards.setAlignment(Pos.CENTER);
         Label existingBoardTitle = new Label("Existing Boards");
         existingBoardTitle.setAlignment(Pos.CENTER);
-        setAlignment(existingBoardTitle, Pos.CENTER);
         existingBoardTitle.setStyle("-fx-font-size: 24px");
-        existingBoards.getChildren().addAll(existingBoardTitle);
+        existingBoards.getChildren().add(existingBoardTitle);
 
         // Existing Boards
         ArrayList<Label> existingBoardList = new ArrayList<Label>();
@@ -47,16 +49,21 @@ public class SplashView extends BorderPane {
         // with their information that was stored in the DB (# of cols, cards in each col)
 
         // If no saved boards, add default message
-        Label defaultMsg = new Label("No existing boards");
-        defaultMsg.setAlignment(Pos.CENTER);
-        setAlignment(defaultMsg, Pos.CENTER);
-        existingBoards.getChildren().add(defaultMsg);
+        if (existingBoardList.size() == 0) {
+            Label defaultMsg = new Label("No existing boards");
+            existingBoards.getChildren().add(defaultMsg);
+        }
         // TODO: End todo
 
-        setStyle("-fx-background-color: lightblue; -fx-text-fill: black; -fx-padding: 10");
+        ScrollPane existingBoardsContainer = new ScrollPane();
+        existingBoardsContainer.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        existingBoardsContainer.setFitToWidth(true);
+        existingBoardsContainer.setContent(existingBoards);
+
+        setAlignment(existingBoardsContainer, Pos.CENTER);
 
         setTop(appTitle);
-        setCenter(existingBoards);
+        setCenter(existingBoardsContainer);
         setBottom(newBoard);
     }
 }
