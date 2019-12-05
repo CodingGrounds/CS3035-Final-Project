@@ -7,6 +7,9 @@ public class CardView extends VBox {
 
     public CardView(Card card) {
         this.card = card;
+
+        setOnMouseClicked(event -> Main.mainScene.setRoot(new CardDetailView(card)));
+
         draw();
     }
 
