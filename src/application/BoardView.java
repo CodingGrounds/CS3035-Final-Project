@@ -38,6 +38,7 @@ public class BoardView extends BorderPane {
     // Top menu
     MenuItem save = new MenuItem("Save Board");
     save.setOnAction(e -> {
+      Main.model.saveBoards();
       e.consume();
       // TODO: SQL to save board to database
     });

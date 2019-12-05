@@ -23,6 +23,10 @@ public class Event extends Card {
     return this.date;
   }
 
+  public void setDescription (String description){
+    this.description.set(description);
+  }
+
   public static Card convertToEvent(EventData input){
     return new Event(input.title(), input.getDescription(), input.getDate());
   }

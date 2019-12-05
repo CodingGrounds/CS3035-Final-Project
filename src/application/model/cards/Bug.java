@@ -15,15 +15,23 @@ public class Bug extends Card {
     this.steps = new SimpleStringProperty(steps);
   }
 
-  public SimpleStringProperty descriptionProperty(){
+  public SimpleStringProperty descriptionProperty() {
     return this.description;
   }
 
-  public SimpleStringProperty stepsProperty(){
+  public SimpleStringProperty stepsProperty() {
     return this.steps;
   }
 
-  public static Card convertToBug(BugData input){
+  public void setDescriptionProperty(String description) {
+    this.description.set(description);
+  }
+
+  public void setStepsProperty(String steps) {
+    this.steps.set(steps);
+  }
+
+  public static Card convertToBug(BugData input) {
     return new Bug(input.title(), input.getDescription(), input.getSteps());
   }
 

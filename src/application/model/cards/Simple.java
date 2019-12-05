@@ -16,9 +16,12 @@ public class Simple extends Card {
     return this.description;
   }
 
+  public void setDescription(String description){
+    this.description.set(description);
+  }
+
   public static Card convertToSimple(SimpleData input){
     return new Simple(input.title(), input.getDescription());
   }
-
 
 }

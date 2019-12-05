@@ -26,7 +26,7 @@ public class Board {
   /**
    * List of application.Column Objects per application.model.Board
    */
-  private transient SimpleListProperty<Column> columns;
+  private SimpleListProperty<Column> columns;
 
   /**
    * Constructor for the application.model.Board
