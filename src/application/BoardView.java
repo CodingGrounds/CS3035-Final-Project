@@ -87,7 +87,7 @@ public class BoardView extends BorderPane {
 
     columnsContainer.getChildren().clear();
     for (Column column : this.board.columnsListProperty()) {
-      columnsContainer.getChildren().add(new ColumnView(column));
+      columnsContainer.getChildren().add(new ColumnView(board, column));
     }
 
     VBox addColumnContainer = new VBox();
