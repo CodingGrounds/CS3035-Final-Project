@@ -1,6 +1,6 @@
 package db.cards;
 
-import model.cards.Event;
+import application.model.cards.Event;
 
 public class EventData extends CardData {
 

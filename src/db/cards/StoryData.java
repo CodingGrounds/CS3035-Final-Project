@@ -1,6 +1,6 @@
 package db.cards;
 
-import model.cards.Story;
+import application.model.cards.Story;
 
 public class StoryData extends CardData {
 

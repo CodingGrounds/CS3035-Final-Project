@@ -1,9 +1,12 @@
+package application;
+
+import application.model.cards.Card;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 public class CardDetailView extends Pane {
 
-    Card card;
+    application.model.cards.Card card;
 
     public CardDetailView(Card card) {
         this.card = card;

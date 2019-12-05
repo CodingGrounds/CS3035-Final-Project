@@ -2,7 +2,7 @@ package db.cards;
 
 import java.io.Serializable;
 /**
- * This class represents the Card Object which has a title
+ * This class represents the application.Card Object which has a title
  *
  * @author Jason Cleveland
  * @author Joshua Laver

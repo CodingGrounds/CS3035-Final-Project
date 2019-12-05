@@ -1,4 +1,4 @@
-package model;
+package application.model;
 
 import db.ColumnData;
 import db.cards.BugData;
@@ -13,15 +13,15 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.cards.Bug;
-import model.cards.Card;
-import model.cards.CheckList;
-import model.cards.Event;
-import model.cards.Simple;
-import model.cards.Story;
+import application.model.cards.Bug;
+import application.model.cards.Card;
+import application.model.cards.CheckList;
+import application.model.cards.Event;
+import application.model.cards.Simple;
+import application.model.cards.Story;
 
 /**
- * This class represents the Column Object which has a name and a List of Cards
+ * This class represents the application.Column Object which has a name and a List of Cards
  *
  * @author Jason Cleveland
  * @author Joshua Laver
@@ -31,17 +31,17 @@ import model.cards.Story;
 public class Column {
 
   /**
-   * Name of the Column
+   * Name of the application.Column
    */
   private transient SimpleStringProperty name;
 
   /**
-   * List of cards per Column
+   * List of cards per application.Column
    */
   private SimpleListProperty<Card> cards;
 
   /**
-   * Constructor for Column Input: Names, List<Cards>
+   * Constructor for application.Column Input: Names, List<Cards>
    */
   public Column(String name, List<Card> cards) {
     this.name = new SimpleStringProperty(name);
@@ -50,7 +50,7 @@ public class Column {
   }
 
   /**
-   * Constructor for Column Input: Name
+   * Constructor for application.Column Input: Name
    */
   public Column(String name) {
     this.name = new SimpleStringProperty(name);
@@ -62,9 +62,9 @@ public class Column {
   /**
    * Method for getting list of cards
    *
-   * @return SimpleListProperty<Card>
+   * @return SimpleListProperty<application.Card>
    */
-  public SimpleListProperty<Card> cardProperty() {
+  public SimpleListProperty<Card> cardsProperty() {
     return this.cards;
   }
 

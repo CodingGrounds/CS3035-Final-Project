@@ -1,3 +1,7 @@
+package application;
+
+import application.model.Board;
+import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -6,13 +10,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-
 /**
  * Class representing the splash view containing navigation buttons
  *
  * @author Jason Cleveland
  */
 public class SplashView extends BorderPane {
+
+    private List<Board> boards;
 
     public SplashView() {
         Label appTitle = new Label("Discount Trello");
@@ -23,9 +28,15 @@ public class SplashView extends BorderPane {
         newBoard.setStyle("-fx-font-size: 24px; -fx-cursor: hand");
         setAlignment(newBoard, Pos.CENTER);
         newBoard.setPadding(new Insets(50,0,50,0));
+
+
+        this.boards = Main.model.boardsProperty().get();
+
         newBoard.setOnMouseClicked(e -> {
             // Sets the scene to a new board
-            Main.mainScene.setRoot(Main.boardView);
+            Board newModelBoard = new Board("temp");
+            this.boards.add(newModelBoard);
+            Main.mainScene.setRoot(new BoardView(newModelBoard));
         });
 
         // TODO: Center these
@@ -40,12 +51,17 @@ public class SplashView extends BorderPane {
         // Existing Boards
         ArrayList<Label> existingBoardList = new ArrayList<Label>();
 
+
+        for(Board board: boards){
+            existingBoardList.add(new Label(board.getName()));
+        }
+
         // TODO: SQL query to fetch any saved boards
 
         // Suggestion: SELECT query will return rows, iterate through those rows
         // and create a new Label (or other element) for each
 
-        // NOTE: when these elements are clicked on, they need to load our model
+        // NOTE: when these elements are clicked on, they need to load our application.model
         // with their information that was stored in the DB (# of cols, cards in each col)
 
         // If no saved boards, add default message

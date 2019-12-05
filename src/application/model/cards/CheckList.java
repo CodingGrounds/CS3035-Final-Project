@@ -1,4 +1,4 @@
-package model.cards;
+package application.model.cards;
 
 import db.cards.CheckListData;
 import java.util.List;

@@ -2,7 +2,7 @@ package db.cards;
 
 import java.util.Arrays;
 import java.util.List;
-import model.cards.CheckList;
+import application.model.cards.CheckList;
 
 public class CheckListData extends CardData {
 

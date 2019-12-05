@@ -1,6 +1,6 @@
 package db.cards;
 
-import model.cards.Bug;
+import application.model.cards.Bug;
 
 public class BugData extends CardData {
 

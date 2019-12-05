@@ -9,13 +9,13 @@ import db.cards.StoryData;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import model.Column;
-import model.cards.Bug;
-import model.cards.Card;
-import model.cards.CheckList;
-import model.cards.Event;
-import model.cards.Simple;
-import model.cards.Story;
+import application.model.Column;
+import application.model.cards.Bug;
+import application.model.cards.Card;
+import application.model.cards.CheckList;
+import application.model.cards.Event;
+import application.model.cards.Simple;
+import application.model.cards.Story;
 
 public class ColumnData implements Serializable {
 
@@ -46,9 +46,7 @@ public class ColumnData implements Serializable {
 
   public static ColumnData convertToColumnData(Column input){
     List<CardData> cardDatas = new ArrayList<>();
-
-
-    for(Card card: input.cardProperty()){
+    for(Card card: input.cardsProperty()){
       if(card instanceof Bug){
         System.out.println("Bug Class");
         cardDatas.add(BugData.convertToBugData((Bug)card));

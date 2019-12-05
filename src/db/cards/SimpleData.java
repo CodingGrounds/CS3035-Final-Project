@@ -1,6 +1,6 @@
 package db.cards;
 
-import model.cards.Simple;
+import application.model.cards.Simple;
 
 public class SimpleData extends CardData {
 

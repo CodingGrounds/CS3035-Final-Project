@@ -14,14 +14,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Board;
-import model.Column;
-import model.cards.Bug;
-import model.cards.Card;
-import model.cards.CheckList;
-import model.cards.Event;
-import model.cards.Simple;
-import model.cards.Story;
+import application.model.Board;
+import application.model.Column;
+import application.model.cards.Bug;
+import application.model.cards.Card;
+import application.model.cards.CheckList;
+import application.model.cards.Event;
+import application.model.cards.Simple;
+import application.model.cards.Story;
 
 /**
  * This class represents the db.DatabaseManager for accessing the Database
@@ -170,11 +170,11 @@ public class DatabaseManager {
 
     DatabaseManager databaseManager = new DatabaseManager();
 //
-//    System.out.println("---- Create Or Update model.Board  1 -----");
+//    System.out.println("---- Create Or Update application.model.Board  1 -----");
 //    boolean result1 = databaseManager.createOrUpdateBoard(1, new BoardData("Fred"));
 //    System.out.println(result1);
 //
-//    System.out.println("---- Create Or Update model.Board  2 -----");
+//    System.out.println("---- Create Or Update application.model.Board  2 -----");
 //    boolean result2 = databaseManager.createOrUpdateBoard(2, new BoardData("Jeff"));
 //    System.out.println(result2);
 //
@@ -199,7 +199,7 @@ public class DatabaseManager {
 ////    ArrayList<Board> boards = new ArrayList<>();
 ////    for (BoardData boardData : boardDatas) {
 ////      boards.add(Board.convertToBoard(boardData));
-////      System.out.println("model.Board: " + boardData.toString());
+////      System.out.println("application.model.Board: " + boardData.toString());
 ////    }
 ////    System.out.println(boards);
 ////

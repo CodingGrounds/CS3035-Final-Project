@@ -1,4 +1,4 @@
-package model;
+package application.model;
 
 import db.BoardData;
 import db.ColumnData;
@@ -9,7 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * This class represents the model.Board Object
+ * This class represents the application.model.Board Object
  *
  * @author Jason Cleveland
  * @author Joshua Laver
@@ -19,17 +19,17 @@ import javafx.collections.ObservableList;
 public class Board {
 
   /**
-   * Name of the model.Board
+   * Name of the application.model.Board
    */
   private String name;
 
   /**
-   * List of Column Objects per model.Board
+   * List of application.Column Objects per application.model.Board
    */
   private transient SimpleListProperty<Column> columns;
 
   /**
-   * Constructor for the model.Board
+   * Constructor for the application.model.Board
    */
   public Board(String name) {
     this.name = name;

@@ -1,4 +1,4 @@
-package model.cards;
+package application.model.cards;
 
 import db.cards.BugData;
 import javafx.beans.property.SimpleStringProperty;

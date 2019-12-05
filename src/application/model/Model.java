@@ -1,4 +1,4 @@
-package model;
+package application.model;
 
 import db.BoardData;
 import db.DatabaseManager;
@@ -7,12 +7,12 @@ import java.util.List;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.cards.Bug;
-import model.cards.Card;
-import model.cards.CheckList;
-import model.cards.Event;
-import model.cards.Simple;
-import model.cards.Story;
+import application.model.cards.Bug;
+import application.model.cards.Card;
+import application.model.cards.CheckList;
+import application.model.cards.Event;
+import application.model.cards.Simple;
+import application.model.cards.Story;
 
 public class Model {
 
@@ -45,6 +45,7 @@ public class Model {
   public SimpleListProperty<Board> boardsProperty() {
     return this.boards;
   }
+
 
   /**
    * Saving board state
@@ -83,15 +84,15 @@ public class Model {
     model.saveBoards();
 //    Board board = new Board("isaac")
 
-//    Model model = new Model();
+//    Model application.model = new Model();
 
 //
 //    System.out.println("----Adding to the Board----");
 //    Board board = new Board("isaac");
-//    board.columnListProperty().add(new Column("col1"));
-//    board.columnListProperty().add(new Column("col2"));
+//    board.columnListProperty().add(new application.Column("col1"));
+//    board.columnListProperty().add(new application.Column("col2"));
 //    boards.add(board);
-////    model.saveBoards();
+////    application.model.saveBoards();
 //    System.out.println("----Getting Boards----");
     List<Board> result = model.boardsProperty().get();
     System.out.println("");

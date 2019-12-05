@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.Board;
-import model.Column;
+import application.model.Board;
+import application.model.Column;
 
 public class BoardData implements Serializable {
 

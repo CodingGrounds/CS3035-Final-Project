@@ -1,9 +1,12 @@
+package application;
+
+import application.model.cards.Card;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class CardView extends VBox {
 
-    Card card;
+    application.model.cards.Card card;
 
     public CardView(Card card) {
         this.card = card;
