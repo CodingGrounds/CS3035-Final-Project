@@ -31,6 +31,18 @@ public class Story extends Card {
     return this.requirements;
   }
 
+  public void setDescription(String description){
+    this.description.setValue(description);
+  }
+
+  public void setStoryPoints(int storyPoints){
+    this.storyPoints.set(storyPoints);
+  }
+
+  public void setRequirements(String requirements){
+    this.requirements.set(requirements);
+  }
+
   public static Card convertToStory(StoryData input){
     return new Story(input.title(), input.getDescription(), input.getStoryPoints(), input.getRequirements());
   }

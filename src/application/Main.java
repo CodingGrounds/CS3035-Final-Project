@@ -28,7 +28,7 @@ public class Main extends Application {
       // Set scene
       mainScene = new Scene(splashView, 800, 600);
 
-      primaryStage.setTitle("Work In Progress");
+      primaryStage.setTitle("Work in Progress");
       primaryStage.setScene(mainScene);
       primaryStage.setMaximized(true);
       primaryStage.show();
