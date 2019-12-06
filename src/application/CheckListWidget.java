@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -25,7 +26,8 @@ public class CheckListWidget extends ScrollPane {
     }
 
     public void setValue(List<CheckBoxData> checkboxes) {
-        checkBoxDataList = checkboxes;
+        // Deep copy the data
+        checkBoxDataList = new ArrayList<>(checkboxes);
     }
 
     public List<CheckBoxData> getValue() {
@@ -41,7 +43,12 @@ public class CheckListWidget extends ScrollPane {
             CheckBox checkBox = new CheckBox(data.getText());
             checkBox.setSelected(data.getSelected());
             checkBox.setOnMouseClicked(event -> {
-                data.setSelected(((CheckBox) event.getSource()).isSelected());
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    data.setSelected(((CheckBox) event.getSource()).isSelected());
+                } else if (event.getButton() == MouseButton.SECONDARY) {
+                    checkBoxDataList.remove(data);
+                    draw();
+                }
             });
             checkBoxContainer.getChildren().add(checkBox);
         }
