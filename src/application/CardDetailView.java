@@ -1,6 +1,7 @@
 package application;
 
 import application.model.Board;
+import application.model.CheckBoxData;
 import application.model.Column;
 import application.model.cards.*;
 import javafx.geometry.Insets;
@@ -9,6 +10,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CardDetailView extends BorderPane {
 
@@ -21,7 +26,7 @@ public class CardDetailView extends BorderPane {
     private TextField titleInput;
     private TextArea descriptionInput;
     private TextArea stepsInput;
-    private TextField checklistInput;
+    private CheckListWidget checklistInput;
     private DatePicker dateInput;
     private Spinner<Integer> storyPointsInput;
     private TextArea requirementsInput;
@@ -62,29 +67,32 @@ public class CardDetailView extends BorderPane {
         titleInput = new TextField();
         descriptionInput = new TextArea();
         stepsInput = new TextArea();
-        checklistInput = new TextField();
+        checklistInput = new CheckListWidget();
         dateInput = new DatePicker();
         storyPointsInput = new Spinner<>(0, 10, 0, 1);
         requirementsInput = new TextArea();
 
         if (!isNew && card != null) {
             // Use saved values
+            titleInput.setText(card.titleProperty().getValue());
+            descriptionInput.setText(card.descriptionProperty().getValue());
             if (card.getClass() == Bug.class) {
-                titleInput.setText(card.titleProperty().getValue());
-                descriptionInput.setText(((Bug) card).descriptionProperty().getValue());
+                selectedCardType = CardType.BUG;
+                selectedType = "Bug";
                 stepsInput.setText(((Bug) card).stepsProperty().getValue());
-            }
-            else if (card.getClass() == CheckList.class) {
-                // TODO:
-            }
-            else if (card.getClass() == Event.class) {
+            } else if (card.getClass() == CheckList.class) {
+                selectedCardType = CardType.CHECKLIST;
+                selectedType = "Checklist";
                 titleInput.setText(card.titleProperty().getValue());
-                descriptionInput.setText(((Event) card).descriptionProperty().getValue());
-//                dateInput.setValue(Date.from(((Event) card).dateProperty().getValue()));
-            }
-            else if (card.getClass() == Story.class) {
-                titleInput.setText(card.titleProperty().getValue());
-                descriptionInput.setText(((Story) card).descriptionProperty().getValue());
+                descriptionInput.setText(card.descriptionProperty().getValue());
+                checklistInput.setValue(((CheckList) card).checkListProperty().getValue());
+            } else if (card.getClass() == Event.class) {
+                selectedCardType = CardType.EVENT;
+                selectedType = "Event";
+                dateInput.setValue(LocalDate.parse(((Event) card).dateProperty().getValue()));
+            } else if (card.getClass() == Story.class) {
+                selectedCardType = CardType.STORY;
+                selectedType = "Story";
                 storyPointsInput.getValueFactory().setValue(((Story) card).storyPointsProperty().getValue());
                 requirementsInput.setText(((Story) card).requirementsProperty().getValue());
             }
@@ -111,7 +119,6 @@ public class CardDetailView extends BorderPane {
     }
 
     private void saveCard() {
-        // TODO: Save card to model
         switch (selectedCardType) {
             case BUG:
                 newCard = new Bug(
@@ -121,10 +128,14 @@ public class CardDetailView extends BorderPane {
                 );
                 break;
             case CHECKLIST:
-                // TODO:
+                List<CheckBoxData> deepCopy = new ArrayList<>(checklistInput.getValue());
+                newCard = new CheckList(
+                        titleInput.getText(),
+                        descriptionInput.getText(),
+                        deepCopy
+                );
                 break;
             case EVENT:
-                System.out.println(dateInput.getValue().toString());
                 newCard = new Event(
                         titleInput.getText(),
                         descriptionInput.getText(),
@@ -141,9 +152,10 @@ public class CardDetailView extends BorderPane {
         }
 
         if (isNew) {
-            this.column.cardsProperty().add(card);
+            this.column.cardsProperty().add(newCard);
         } else {
-            // TODO: Update existing card
+            int index = this.column.cardsProperty().indexOf(card);
+            this.column.cardsProperty().set(index, newCard);
         }
 
         Main.mainScene.setRoot(new BoardView(board));
@@ -210,6 +222,7 @@ public class CardDetailView extends BorderPane {
                     break;
                 case CHECKLIST:
                     inputContainer.addRow(3, checklistLabel, checklistInput);
+                    checklistInput.draw();
                     break;
                 case EVENT:
                     inputContainer.addRow(3, dateLabel, dateInput);

@@ -35,7 +35,7 @@ public class BoardView extends BorderPane {
       col.cardsProperty().addListener((ListChangeListener<Card>) c -> draw());
     }
 
-    MenuItem back = new MenuItem("Other Board");
+    MenuItem back = new MenuItem("Close Board");
     back.setOnAction(e ->{
       Main.mainScene.setRoot(Main.splashView);
       e.consume();

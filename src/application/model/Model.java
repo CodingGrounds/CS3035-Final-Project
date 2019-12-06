@@ -65,8 +65,8 @@ public class Model {
 
     Board board = new Board("Board");
 
-    List<String> strings = new ArrayList<>();
-    strings.add("Josh");
+    List<CheckBoxData> strings = new ArrayList<>();
+    strings.add(new CheckBoxData("Josh", false));
     List<Card> cards = new ArrayList<>();
 
     board.columnsListProperty().add(new Column("Columns", cards));

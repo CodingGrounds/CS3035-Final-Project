@@ -2,7 +2,6 @@ package application;
 
 import application.model.Board;
 import application.model.Column;
-import application.model.cards.Bug;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
