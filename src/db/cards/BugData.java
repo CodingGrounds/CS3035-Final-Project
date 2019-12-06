@@ -4,18 +4,11 @@ import application.model.cards.Bug;
 
 public class BugData extends CardData {
 
-  private String description;
-
   private String steps;
 
   public BugData(String title, String description, String steps) {
-    super(title);
-    this.description = description;
+    super(title, description);
     this.steps = steps;
-  }
-
-  public String getDescription(){
-    return this.description;
   }
 
   public String getSteps(){

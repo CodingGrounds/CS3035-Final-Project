@@ -13,12 +13,19 @@ public abstract class CardData implements Serializable {
 
   private String title;
 
-  public CardData(String title) {
+  private String description;
+
+  public CardData(String title, String description) {
     this.title = title;
+    this.description = description;
   }
 
   public String title() {
-    return title;
+    return this.title;
+  }
+
+  public String getDescription (){
+    return this.description;
   }
 
 }

@@ -28,9 +28,8 @@ public class CardView extends VBox {
         setMinWidth(150);
         setMinHeight(50);
 
-        Label title = new Label("Title");
-        Label description = new Label("Description here.");
-
+        Label title = new Label(card.titleProperty().get());
+        Label description = new Label(card.descriptionProperty().get());
         getChildren().addAll(title, description);
     }
 }

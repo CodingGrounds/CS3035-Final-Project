@@ -5,7 +5,6 @@ import db.cards.BugData;
 import db.cards.CardData;
 import db.cards.CheckListData;
 import db.cards.EventData;
-import db.cards.SimpleData;
 import db.cards.StoryData;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ import application.model.cards.Bug;
 import application.model.cards.Card;
 import application.model.cards.CheckList;
 import application.model.cards.Event;
-import application.model.cards.Simple;
 import application.model.cards.Story;
 
 /**
@@ -92,10 +90,6 @@ public class Column {
       else if(cardData instanceof EventData){
         System.out.println("Event Class");
         cards.add(Event.convertToEvent((EventData) cardData));
-      }
-      else if(cardData instanceof SimpleData){
-        System.out.println("Simple Class");
-        cards.add(Simple.convertToSimple((SimpleData) cardData));
       }
       else if(cardData instanceof StoryData){
         System.out.println("Story Class");

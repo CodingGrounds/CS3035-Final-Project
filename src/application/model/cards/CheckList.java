@@ -10,23 +10,23 @@ public class CheckList extends Card {
 
   private SimpleListProperty<String> checkList;
 
-  public CheckList(String title, List<String> list) {
-    super(title);
+  public CheckList(String title, String description, List<String> list) {
+    super(title, description);
     ObservableList<String> observableList = FXCollections.observableArrayList(list);
     this.checkList = new SimpleListProperty<>(observableList);
   }
 
-  public SimpleListProperty<String> checkListProperty(){
+  public SimpleListProperty<String> checkListProperty() {
     return this.checkList;
   }
 
-  public void setCheckList(List<String> checkList){
+  public void setCheckList(List<String> checkList) {
     this.checkList.clear();
     this.checkList.addAll(checkList);
   }
 
-  public static Card convertToCheckList(CheckListData input){
-    return new CheckList(input.title(), input.getCheckList());
+  public static Card convertToCheckList(CheckListData input) {
+    return new CheckList(input.title(), input.getDescription(), input.getCheckList());
   }
 
 }

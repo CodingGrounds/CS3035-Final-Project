@@ -4,21 +4,14 @@ import application.model.cards.Story;
 
 public class StoryData extends CardData {
 
-  private String description;
-
   private int storyPoints;
 
   private String requirements;
 
   public StoryData(String title, String description, int storyPoints, String requirements) {
-    super(title);
-    this.description = description;
+    super(title, description);
     this.storyPoints = storyPoints;
     this.requirements = requirements;
-  }
-
-  public String getDescription(){
-    return this.description;
   }
 
   public int  getStoryPoints(){
