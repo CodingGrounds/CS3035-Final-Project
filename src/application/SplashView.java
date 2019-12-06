@@ -37,6 +37,7 @@ public class SplashView extends BorderPane {
             // Sets the scene to a new board
             Board newModelBoard = new Board("temp");
             this.boards.add(newModelBoard);
+            Main.interactiveModel.setCurrentBoard(newModelBoard);
             Main.mainScene.setRoot(new BoardView(newModelBoard));
         });
 
@@ -55,6 +56,7 @@ public class SplashView extends BorderPane {
 
             label.setOnMouseClicked(event->{
                 System.out.println("Label Click on Board " + board.getName());
+                Main.interactiveModel.setCurrentBoard(board);
                 Main.mainScene.setRoot(new BoardView(board));
             });
 
