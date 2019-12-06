@@ -2,19 +2,15 @@ package application;
 
 import application.model.Board;
 import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import java.util.Optional;
 
 /**
  * Class representing the splash view containing navigation buttons
@@ -25,9 +21,13 @@ public class SplashView extends BorderPane {
     private List<Board> boards;
 
     //TODO Make Existing list pretty | Bigger
-    //TODO Convert to having a controller
 
     public SplashView() {
+        Main.model.boardsProperty().addListener((observable, oldValue, newValue) -> draw());
+        draw();
+    }
+
+    public void draw() {
         Label appTitle = new Label("Work in Progress");
         appTitle.setStyle("-fx-font-size: 40px");
         setAlignment(appTitle, Pos.CENTER);
@@ -40,11 +40,19 @@ public class SplashView extends BorderPane {
         this.boards = Main.model.boardsProperty().get();
 
         newBoard.setOnMouseClicked(e -> {
-            // Sets the scene to a new board
-            Board newModelBoard = new Board("temp");
-            this.boards.add(newModelBoard);
-            Main.interactiveModel.setCurrentBoard(newModelBoard);
-            Main.mainScene.setRoot(new BoardView(newModelBoard));
+            // Get the name of the board
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Board title");
+            dialog.setHeaderText("Enter a name for the new board.");
+            dialog.setGraphic(null);
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                Board newModelBoard = new Board(result.get());
+                this.boards.add(newModelBoard);
+                Main.interactiveModel.setCurrentBoard(newModelBoard);
+                Main.mainScene.setRoot(new BoardView(newModelBoard));
+            }
         });
 
         VBox existingBoards = new VBox();
