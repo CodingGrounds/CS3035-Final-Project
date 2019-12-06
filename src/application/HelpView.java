@@ -21,9 +21,11 @@ public class HelpView extends Pane {
 		Label title = new Label("Help");
 		title.setStyle("-fx-font-size: 36;-fx-font-weight: bold;");
 		
-		Label instructions = new Label("Work In Progress is an application designed to help you track your tasks and organize them within columns."
+		Label instructions = new Label(
+				"Work In Progress is an application designed to help you track your tasks and organize them within columns."
 				+ "\n\nClick on the '+' to add columns and cards within the columns."
-				+ "\n\nThere are different types of cards to represent different tasks. Click on a card to view/edit the card's details.");
+				+ "\n\nThere are different types of cards to represent different tasks. Click on a card to view/edit the card's details."
+				+ "\n\nDelete: Right Click on the card object");
 		instructions.setStyle("-fx-font-size: 20;");
 		
 		Button close = new Button("Close");
