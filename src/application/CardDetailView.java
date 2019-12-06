@@ -177,6 +177,7 @@ public class CardDetailView extends BorderPane {
         }
 
         Label title = new Label(titleText);
+        title.setStyle("-fx-font-size: 40px;");
         setAlignment(title, Pos.CENTER);
 
         // Create interaction buttons

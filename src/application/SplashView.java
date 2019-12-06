@@ -32,7 +32,7 @@ public class SplashView extends BorderPane {
         appTitle.setStyle("-fx-font-size: 40px");
         setAlignment(appTitle, Pos.CENTER);
 
-        Label newBoard = new Label("Add Board");
+        Label newBoard = new Label("New Board");
         newBoard.setStyle("-fx-font-size: 24px; -fx-cursor: hand");
         setAlignment(newBoard, Pos.CENTER);
         newBoard.setPadding(new Insets(50,0,50,0));
@@ -58,9 +58,6 @@ public class SplashView extends BorderPane {
         VBox existingBoards = new VBox();
         existingBoards.setFillWidth(true);
         existingBoards.setAlignment(Pos.CENTER);
-        Label existingBoardTitle = new Label("Existing Boards");
-        existingBoardTitle.setAlignment(Pos.CENTER);
-        existingBoardTitle.setStyle("-fx-font-size: 24px;");
 
         // Existing Boards
         ArrayList<Label> existingBoardList = new ArrayList<Label>();
@@ -77,7 +74,6 @@ public class SplashView extends BorderPane {
             existingBoardList.add(label);
         }
 
-        existingBoards.getChildren().add(existingBoardTitle);
         existingBoards.getChildren().addAll(existingBoardList);
 
         if (existingBoardList.size() == 0) {
