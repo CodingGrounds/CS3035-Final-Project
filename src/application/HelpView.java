@@ -11,7 +11,6 @@ public class HelpView extends Pane {
 
 	public HelpView() {
 		HBox h = new HBox();
-		h.setPrefSize(1600, 900);
 		h.setStyle("-fx-padding: 20;");
 		h.setAlignment(Pos.TOP_LEFT);
 		
@@ -20,23 +19,25 @@ public class HelpView extends Pane {
 		
 		Label title = new Label("Help");
 		title.setStyle("-fx-font-size: 36;-fx-font-weight: bold;");
-		
-		Label instructions = new Label(
-				"Work In Progress is an application designed to help you track your tasks and organize them within columns."
-				+ "\n\nClick on the '+' to add columns and cards within the columns."
-				+ "\n\nThere are different types of cards to represent different tasks. Click on a card to view/edit the card's details."
-				+ "\n\nDelete: Right Click on the card object");
+
+		VBox instructionsContainer = new VBox();
+		Label instructions = new Label("Work In Progress is an application designed to help you track your tasks and organize them within lists.");
 		instructions.setStyle("-fx-font-size: 20;");
+		Label add = new Label("Click on the '+' button to add columns and cards.");
+		add.setStyle("-fx-font-size: 20;");
+		Label edit = new Label("Left-Click on a card to view details and edit.");
+		edit.setStyle("-fx-font-size: 20;");
+		Label delete = new Label("Right-Click on a card or checkbox in checkbox card to delete it.");
+		delete.setStyle("-fx-font-size: 20;");
+		instructionsContainer.getChildren().addAll(instructions, add, edit, delete);
 		
 		Button close = new Button("Close");
 		close.setAlignment(Pos.CENTER);
 		
-		v.getChildren().addAll(title, instructions, close);
+		v.getChildren().addAll(title, instructionsContainer, close);
 		h.getChildren().add(v);
-		this.getChildren().add(h);
+		getChildren().add(h);
 		
-		close.setOnAction(e -> {
-			Main.mainScene.setRoot(new BoardView(Main.interactiveModel.getCurrentBoard()));
-		});
+		close.setOnAction(e -> Main.mainScene.setRoot(new BoardView(Main.interactiveModel.getCurrentBoard())));
 	}
 }
