@@ -62,7 +62,6 @@ public class ColumnView extends ScrollPane {
         addCard.setOnMouseClicked(event -> {
             Main.mainScene.setRoot(new CardDetailView(board, column));
             draw();
-
         });
         addCardContainer.getChildren().add(addCard);
         cardsContainer.getChildren().add(addCardContainer);

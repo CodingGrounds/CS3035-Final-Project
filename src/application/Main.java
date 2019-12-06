@@ -28,9 +28,6 @@ public class Main extends Application {
     try {
       // Set scene
       mainScene = new Scene(splashView, 800, 600);
-
-
-
       primaryStage.setTitle("Work in Progress");
       primaryStage.setScene(mainScene);
       primaryStage.setMaximized(true);
@@ -50,5 +47,4 @@ public class Main extends Application {
     System.out.println("Stage is closing");
     model.saveBoards();
   }
-
 }

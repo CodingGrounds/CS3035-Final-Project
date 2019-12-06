@@ -1,15 +1,16 @@
 package application;
 
 import application.model.Board;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
 
 /**
  * Class representing the splash view containing navigation buttons
@@ -20,14 +21,18 @@ public class SplashView extends BorderPane {
     private List<Board> boards;
 
     //TODO Make Existing list pretty | Bigger
-    //TODO Convert to having a controller
 
     public SplashView() {
+        Main.model.boardsProperty().addListener((observable, oldValue, newValue) -> draw());
+        draw();
+    }
+
+    public void draw() {
         Label appTitle = new Label("Work in Progress");
         appTitle.setStyle("-fx-font-size: 40px");
         setAlignment(appTitle, Pos.CENTER);
 
-        Label newBoard = new Label("Add Board");
+        Label newBoard = new Label("New Board");
         newBoard.setStyle("-fx-font-size: 24px; -fx-cursor: hand");
         setAlignment(newBoard, Pos.CENTER);
         newBoard.setPadding(new Insets(50,0,50,0));
@@ -35,19 +40,24 @@ public class SplashView extends BorderPane {
         this.boards = Main.model.boardsProperty().get();
 
         newBoard.setOnMouseClicked(e -> {
-            // Sets the scene to a new board
-            Board newModelBoard = new Board("temp");
-            this.boards.add(newModelBoard);
-            Main.interactiveModel.setCurrentBoard(newModelBoard);
-            Main.mainScene.setRoot(new BoardView(newModelBoard));
+            // Get the name of the board
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Board title");
+            dialog.setHeaderText("Enter a name for the new board.");
+            dialog.setGraphic(null);
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                Board newModelBoard = new Board(result.get());
+                this.boards.add(newModelBoard);
+                Main.interactiveModel.setCurrentBoard(newModelBoard);
+                Main.mainScene.setRoot(new BoardView(newModelBoard));
+            }
         });
 
         VBox existingBoards = new VBox();
         existingBoards.setFillWidth(true);
         existingBoards.setAlignment(Pos.CENTER);
-        Label existingBoardTitle = new Label("Existing Boards");
-        existingBoardTitle.setAlignment(Pos.CENTER);
-        existingBoardTitle.setStyle("-fx-font-size: 24px;");
 
         // Existing Boards
         ArrayList<Label> existingBoardList = new ArrayList<Label>();
@@ -64,7 +74,6 @@ public class SplashView extends BorderPane {
             existingBoardList.add(label);
         }
 
-        existingBoards.getChildren().add(existingBoardTitle);
         existingBoards.getChildren().addAll(existingBoardList);
 
         if (existingBoardList.size() == 0) {

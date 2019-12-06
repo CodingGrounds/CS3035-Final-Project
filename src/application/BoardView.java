@@ -3,7 +3,6 @@ package application;
 import application.model.Board;
 import application.model.Column;
 import application.model.cards.Card;
-import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -39,51 +38,12 @@ public class BoardView extends BorderPane {
       col.cardsProperty().addListener((ListChangeListener<Card>) c -> draw());
     }
 
-    MenuItem back = new MenuItem("Close Board");
-    back.setOnAction(e ->{
-      Main.mainScene.setRoot(Main.splashView);
-      e.consume();
-    });
-
-    // Top menu
-    MenuItem save = new MenuItem("Save Board");
-    save.setOnAction(e -> {
-      Main.model.saveBoards();
-      e.consume();
-    });
-
-    MenuItem exit = new MenuItem("Exit");
-    exit.setOnAction(e -> {
-      e.consume();
-      Platform.exit();
-    });
-
-    MenuItem help = new MenuItem("Help");
-    help.setOnAction(e -> {
-      Main.mainScene.setRoot(new HelpView());
-      e.consume();
-    });
-
-    MenuItem about = new MenuItem("About");
-    about.setOnAction(e -> {
-	  Main.mainScene.setRoot(new AboutView());
-      e.consume();
-    });
-
-    MenuBar menuBar = new MenuBar();
-    Menu menuFile = new Menu("File");
-    Menu menuHelp = new Menu("Help");
-    menuFile.getItems().addAll(back, save, exit);
-    menuHelp.getItems().addAll(help, about);
-    menuBar.getMenus().addAll(menuFile, menuHelp);
-
-    // TODO: Find a place for this
     // Board Name
     Label boardName = new Label("Board Name");
     boardName.setStyle("-fx-font-size: 40px");
     boardName.setAlignment(Pos.TOP_CENTER);
 
-    setTop(menuBar);
+    setTop(new MenuBarWidget());
 
     draw();
   }
