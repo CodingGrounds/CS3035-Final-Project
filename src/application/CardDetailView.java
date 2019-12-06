@@ -119,6 +119,10 @@ public class CardDetailView extends BorderPane {
     }
 
     private void saveCard() {
+        // A type and title must be present to save a card
+        if (selectedCardType == null || (titleInput.getText() != null && titleInput.getText().isEmpty())) {
+            return;
+        }
         switch (selectedCardType) {
             case BUG:
                 newCard = new Bug(
@@ -173,6 +177,7 @@ public class CardDetailView extends BorderPane {
         }
 
         Label title = new Label(titleText);
+        title.setStyle("-fx-font-size: 40px;");
         setAlignment(title, Pos.CENTER);
 
         // Create interaction buttons

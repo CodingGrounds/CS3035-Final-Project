@@ -60,8 +60,11 @@ public class CheckListWidget extends ScrollPane {
         newCheckboxText.setPrefWidth(450);
         Button addCheckbox = new Button("+");
         addCheckbox.setOnMouseClicked(event -> {
-            checkBoxDataList.add(new CheckBoxData(newCheckboxText.getText(), false));
-            draw();
+            // Prevent the user from saving an empty
+            if (!newCheckboxText.getText().isEmpty()) {
+                checkBoxDataList.add(new CheckBoxData(newCheckboxText.getText(), false));
+                draw();
+            }
         });
         inputContainer.getChildren().addAll(addCheckbox, newCheckboxText);
         checkBoxContainer.getChildren().add(inputContainer);
