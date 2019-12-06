@@ -9,7 +9,7 @@ public class EventData extends CardData {
   private String date;
 
   public EventData(String title, String description, String date) {
-    super(title);
+    super(title, description);
     this.description = description;
     this.date = date;
   }
@@ -21,7 +21,6 @@ public class EventData extends CardData {
   public String getDate(){
     return this.date;
   }
-
 
   public static CardData convertToEventData(Event input){
 

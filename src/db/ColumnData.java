@@ -4,7 +4,6 @@ import db.cards.BugData;
 import db.cards.CardData;
 import db.cards.CheckListData;
 import db.cards.EventData;
-import db.cards.SimpleData;
 import db.cards.StoryData;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import application.model.cards.Bug;
 import application.model.cards.Card;
 import application.model.cards.CheckList;
 import application.model.cards.Event;
-import application.model.cards.Simple;
 import application.model.cards.Story;
 
 public class ColumnData implements Serializable {
@@ -58,10 +56,6 @@ public class ColumnData implements Serializable {
       else if(card instanceof Event){
         System.out.println("Event Class");
         cardDatas.add(EventData.convertToEventData((Event) card));
-      }
-      else if(card instanceof Simple){
-        System.out.println("Simple Class");
-        cardDatas.add(SimpleData.convertToSimpleData((Simple) card));
       }
       else if(card instanceof Story){
         System.out.println("Story Class");
