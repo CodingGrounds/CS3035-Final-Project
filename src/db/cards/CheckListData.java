@@ -8,8 +8,8 @@ public class CheckListData extends CardData {
 
   private List<String> checkList;
 
-  public CheckListData(String title, List<String> list) {
-    super(title);
+  public CheckListData(String title, String description, List<String> list) {
+    super(title, description);
     this.checkList = list;
   }
 
@@ -23,6 +23,6 @@ public class CheckListData extends CardData {
     String[] temp = new String[strings.size()];
     temp = strings.toArray(temp);
     List<String> result = Arrays.asList(temp);
-    return new CheckListData(input.titleProperty().get(), result);
+    return new CheckListData(input.titleProperty().get(), input.descriptionProperty().get(), result);
   }
 }

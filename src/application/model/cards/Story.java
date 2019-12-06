@@ -6,21 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Story extends Card {
 
-  private SimpleStringProperty description;
-
   private SimpleIntegerProperty storyPoints;
 
   private SimpleStringProperty requirements;
 
   public Story(String title, String description, int storyPoints, String requirements) {
-    super(title);
-    this.description = new SimpleStringProperty(description);
+    super(title, description);
     this.storyPoints = new SimpleIntegerProperty(storyPoints);
     this.requirements = new SimpleStringProperty(requirements);
-  }
-
-  public SimpleStringProperty descriptionProperty(){
-    return this.description;
   }
 
   public SimpleIntegerProperty storyPointsProperty(){
@@ -29,10 +22,6 @@ public class Story extends Card {
 
   public SimpleStringProperty requirementsProperty(){
     return this.requirements;
-  }
-
-  public void setDescription(String description){
-    this.description.setValue(description);
   }
 
   public void setStoryPoints(int storyPoints){

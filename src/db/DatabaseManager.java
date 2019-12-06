@@ -20,7 +20,6 @@ import application.model.cards.Bug;
 import application.model.cards.Card;
 import application.model.cards.CheckList;
 import application.model.cards.Event;
-import application.model.cards.Simple;
 import application.model.cards.Story;
 
 /**
@@ -210,9 +209,8 @@ public class DatabaseManager {
     board.columnsListProperty().add(new Column("Columns", cards));
 
     cards.add(new Bug("Bug 1", "B 1", "steps 1"));
-    cards.add(new CheckList("Checklist 1", strings));
+    cards.add(new CheckList("Checklist 1", "d1", strings));
     cards.add(new Event("Event 1", "D 1", "s213132"));
-    cards.add(new Simple("Simple 1", "sim d"));
     cards.add(new Story("story 1", "d 1", 2, "requirements 1"));
 
     System.out.print("Board: " + board);

@@ -35,6 +35,12 @@ public class BoardView extends BorderPane {
       col.cardsProperty().addListener((ListChangeListener<Card>) c -> draw());
     }
 
+    MenuItem back = new MenuItem("Other Board");
+    back.setOnAction(e ->{
+      Main.mainScene.setRoot(Main.splashView);
+      e.consume();
+    });
+
     // Top menu
     MenuItem save = new MenuItem("Save Board");
     save.setOnAction(e -> {
@@ -64,7 +70,7 @@ public class BoardView extends BorderPane {
     MenuBar menuBar = new MenuBar();
     Menu menuFile = new Menu("File");
     Menu menuHelp = new Menu("Help");
-    menuFile.getItems().addAll(save, exit);
+    menuFile.getItems().addAll(back, save, exit);
     menuHelp.getItems().addAll(help, about);
     menuBar.getMenus().addAll(menuFile, menuHelp);
 
@@ -87,7 +93,7 @@ public class BoardView extends BorderPane {
 
     columnsContainer.getChildren().clear();
     for (Column column : this.board.columnsListProperty()) {
-      columnsContainer.getChildren().add(new ColumnView(column));
+      columnsContainer.getChildren().add(new ColumnView(board, column));
     }
 
     VBox addColumnContainer = new VBox();
