@@ -5,7 +5,6 @@ import application.model.Column;
 import application.model.cards.Bug;
 import application.model.cards.Card;
 import application.model.cards.CheckList;
-import application.model.cards.Event;
 import application.model.cards.Story;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,9 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
 public class CardView extends VBox {
 

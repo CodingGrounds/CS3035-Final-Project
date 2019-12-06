@@ -2,19 +2,14 @@ package application;
 
 import application.model.Board;
 import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 /**
  * Class representing the splash view containing navigation buttons

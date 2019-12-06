@@ -20,7 +20,6 @@ public class Main extends Application {
   public static final Model model = new Model();
   public static final InteractiveModel interactiveModel = new InteractiveModel();
   public static final SplashView splashView = new SplashView();
-  public static final Controller controller = new Controller();
 
   public static Scene mainScene;
 

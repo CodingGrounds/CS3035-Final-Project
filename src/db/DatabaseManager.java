@@ -13,15 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import application.model.Board;
-import application.model.CheckBoxData;
-import application.model.Column;
-import application.model.cards.Bug;
-import application.model.cards.Card;
-import application.model.cards.CheckList;
-import application.model.cards.Event;
-import application.model.cards.Story;
 
 /**
  * This class represents the db.DatabaseManager for accessing the Database
@@ -164,68 +155,6 @@ public class DatabaseManager {
       }
     }
     return result;
-  }
-
-  public static void main(String[] args) {
-
-    DatabaseManager databaseManager = new DatabaseManager();
-//
-//    System.out.println("---- Create Or Update application.model.Board  1 -----");
-//    boolean result1 = databaseManager.createOrUpdateBoard(1, new BoardData("Fred"));
-//    System.out.println(result1);
-//
-//    System.out.println("---- Create Or Update application.model.Board  2 -----");
-//    boolean result2 = databaseManager.createOrUpdateBoard(2, new BoardData("Jeff"));
-//    System.out.println(result2);
-//
-//    System.out.println("---- GetBoards ----");
-//    ArrayList<BoardData> boardDatas = databaseManager.getBoards();
-//    ArrayList<ColumnData> columnDatas = new ArrayList<>();
-//
-//    List<CardData> cardsData = new ArrayList<>();
-
-    List<CheckBoxData> strings = new ArrayList<>();
-    strings.add(new CheckBoxData("check1", true));
-    strings.add(new CheckBoxData("check2", false));
-
-//    columnDatas.add(new ColumnData("Jeff", cardsData));
-////    cardsData.add(new BugData("Bug", "crap", "1 2 3 "));
-////    cardsData.add(new CheckListData("CheckList", strings));
-////    cardsData.add(new EventData("Event", "Event Description", "21313213123"));
-////    cardsData.add(new SimpleData("Simple", "Simple card"));
-////    cardsData.add(new StoryData("Story", "story description", 1, "requirements"));
-////    boardDatas.add(new BoardData("new", columnDatas));
-////
-////    ArrayList<Board> boards = new ArrayList<>();
-////    for (BoardData boardData : boardDatas) {
-////      boards.add(Board.convertToBoard(boardData));
-////      System.out.println("application.model.Board: " + boardData.toString());
-////    }
-////    System.out.println(boards);
-////
-    Board board = new Board("Board");
-
-    List<Card> cards = new ArrayList<>();
-
-    board.columnsListProperty().add(new Column("Columns", cards));
-
-    cards.add(new Bug("Bug 1", "B 1", "steps 1"));
-    cards.add(new CheckList("Checklist 1", "d1", strings));
-    cards.add(new Event("Event 1", "D 1", "s213132"));
-    cards.add(new Story("story 1", "d 1", 2, "requirements 1"));
-
-    System.out.print("Board: " + board);
-
-    BoardData boardData2 = BoardData.convertToBoardData(board);
-
-    databaseManager.createOrUpdateBoard(1, boardData2);
-
-    List<BoardData> boardData = databaseManager.getBoards();
-
-    Board result = Board.convertToBoard(boardData.get(0));
-
-    System.out.print("Finish");
-
   }
 }
 

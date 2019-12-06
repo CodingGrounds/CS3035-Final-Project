@@ -1,7 +1,8 @@
 # Group Project for UNB CS 3035 Building User Interfaces
 
-### Application Name: Discount Trello  
-###Description: For when you have really tight budget but need a TODO list
+### Application Name: Work in Progress
+### Version: 1.0
+### Description: This application is an epic note board. For when you have a really tight budget but need to get tasks done.
 
 ## Members
 * Jason Cleveland
@@ -9,13 +10,22 @@
 * Jata Maccabe
 * Anthony Tomarchio
 
+## Features
+* Splash View
+* Board Scene
+* Column View
+* Cards View
+  * Click to edit
+  * Right Click to delete
+  * Different Colors per card
+* Card Details Scene
+  * Create or Edit Card Details
+* Different Types of Card Objects
+  * Bug
+  * CheckList
+  * Event
+  * Story
+* SQLite Database for storing state.
 
-### DEV TASKS
 
-- Application name / description
-- Saving/loading board information (board name, cols, and cards associated with each col)
-- Changing/saving card information (header, content)
-	- Currently, cards are created with default cards only
-	- Currently, cards can be deleted using right-click (can be changed to different key/control)
-- Drag and drop cards into different cols and updating the model
-- Help/About sections
+
