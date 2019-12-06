@@ -47,8 +47,7 @@ public class ColumnView extends ScrollPane {
         addCardContainer.setMinHeight(50);
         Label addCard = new Label("+");
         addCard.setOnMouseClicked(event -> {
-            column.cardsProperty().add(new Bug("Bug", "New Bug", "1 2 3"));
-//            column.addCard(new Card(column));
+            Main.mainScene.setRoot(new CardDetailView(board, column));
             draw();
 
         });
