@@ -5,10 +5,16 @@ import application.model.Column;
 import application.model.cards.Bug;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import jiconfont.IconFont;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.javafx.IconFontFX;
+import jiconfont.javafx.IconNode;
 
 public class ColumnView extends ScrollPane {
 
@@ -41,14 +47,23 @@ public class ColumnView extends ScrollPane {
             cardsContainer.getChildren().add(new CardView(board, column, card));
         }
 
+        IconFontFX.register(FontAwesome.getIconFont());
+
+        IconNode iconNode = new IconNode(FontAwesome.PLUS_CIRCLE);
+        iconNode.setIconSize(30);
+        iconNode.setFill(Color.DODGERBLUE);
+
         HBox addCardContainer = new HBox();
         addCardContainer.setPadding(new Insets(20));
         addCardContainer.setAlignment(Pos.CENTER);
         addCardContainer.setMinHeight(50);
-        Label addCard = new Label("+");
+
+        Label addCard = new Label();
+        addCard.setGraphic(iconNode);
+        addCard.setStyle("-fx-cursor: hand;");
+
         addCard.setOnMouseClicked(event -> {
             column.cardsProperty().add(new Bug("Bug", "New Bug", "1 2 3"));
-//            column.addCard(new Card(column));
             draw();
 
         });
