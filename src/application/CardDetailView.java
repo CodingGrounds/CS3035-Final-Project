@@ -39,14 +39,7 @@ public class CardDetailView extends BorderPane {
         this.column = column;
         isNew = true;
 
-        titleInput = new TextField();
-        descriptionInput = new TextArea();
-        stepsInput = new TextArea();
-        checklistInput = new TextField();
-        dateInput = new DatePicker();
-        storyPointsInput = new Spinner<>(0, 10, 0, 1);
-        requirementsInput = new TextArea();
-
+        setup();
         draw();
     }
 
@@ -61,6 +54,11 @@ public class CardDetailView extends BorderPane {
         this.card = card;
         isNew = false;
 
+        setup();
+        draw();
+    }
+
+    private void setup() {
         titleInput = new TextField();
         descriptionInput = new TextArea();
         stepsInput = new TextArea();
@@ -69,7 +67,28 @@ public class CardDetailView extends BorderPane {
         storyPointsInput = new Spinner<>(0, 10, 0, 1);
         requirementsInput = new TextArea();
 
-        draw();
+        if (!isNew && card != null) {
+            // Use saved values
+            if (card.getClass() == Bug.class) {
+                titleInput.setText(card.titleProperty().getValue());
+                descriptionInput.setText(((Bug) card).descriptionProperty().getValue());
+                stepsInput.setText(((Bug) card).stepsProperty().getValue());
+            }
+            else if (card.getClass() == CheckList.class) {
+                // TODO:
+            }
+            else if (card.getClass() == Event.class) {
+                titleInput.setText(card.titleProperty().getValue());
+                descriptionInput.setText(((Event) card).descriptionProperty().getValue());
+//                dateInput.setValue(Date.from(((Event) card).dateProperty().getValue()));
+            }
+            else if (card.getClass() == Story.class) {
+                titleInput.setText(card.titleProperty().getValue());
+                descriptionInput.setText(((Story) card).descriptionProperty().getValue());
+                storyPointsInput.getValueFactory().setValue(((Story) card).storyPointsProperty().getValue());
+                requirementsInput.setText(((Story) card).requirementsProperty().getValue());
+            }
+        }
     }
 
     private void typeChanged() {
@@ -124,19 +143,7 @@ public class CardDetailView extends BorderPane {
         if (isNew) {
             this.column.cardsProperty().add(card);
         } else {
-            // TODO:
-            if (card.getClass() == Bug.class) {
-
-            }
-            else if (card.getClass() == CheckList.class) {
-
-            }
-            else if (card.getClass() == Event.class) {
-
-            }
-            else if (card.getClass() == Story.class) {
-
-            }
+            // TODO: Update existing card
         }
 
         Main.mainScene.setRoot(new BoardView(board));
@@ -165,7 +172,7 @@ public class CardDetailView extends BorderPane {
         Button cancelButton = new Button("Cancel");
         cancelButton.setCancelButton(true);
         cancelButton.setPrefWidth(100);
-        cancelButton.setOnMouseClicked(event -> saveCard());
+        cancelButton.setOnMouseClicked(event -> Main.mainScene.setRoot(new BoardView(board)));
 
         HBox buttonContainer = new HBox();
         buttonContainer.setSpacing(10);
