@@ -4,6 +4,7 @@ import application.model.Board;
 import application.model.Column;
 import application.model.cards.Card;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 
 public class CardView extends VBox {
@@ -17,7 +18,14 @@ public class CardView extends VBox {
         this.column = column;
         this.card = card;
 
-        setOnMouseClicked(event -> Main.mainScene.setRoot(new CardDetailView(board, column, card)));
+        setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                Main.mainScene.setRoot(new CardDetailView(board, column, card));
+            }
+            else if (event.getButton() == MouseButton.SECONDARY) {
+                column.cardsProperty().remove(this.card);
+            }
+        });
 
         draw();
     }
