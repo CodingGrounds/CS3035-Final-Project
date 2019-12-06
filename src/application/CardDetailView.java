@@ -207,6 +207,10 @@ public class CardDetailView extends BorderPane {
         typeInput.setOnAction(event -> typeChanged());
         typeInput.setValue(selectedType);
 
+        descriptionInput.setPrefRowCount(5);
+
+        storyPointsInput.setPrefWidth(100);
+
         GridPane inputContainer = new GridPane();
         inputContainer.setAlignment(Pos.CENTER);
         inputContainer.setVgap(10);

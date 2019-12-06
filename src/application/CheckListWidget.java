@@ -40,6 +40,9 @@ public class CheckListWidget extends ScrollPane {
         for (CheckBoxData data: checkBoxDataList) {
             CheckBox checkBox = new CheckBox(data.getText());
             checkBox.setSelected(data.getSelected());
+            checkBox.setOnMouseClicked(event -> {
+                data.setSelected(((CheckBox) event.getSource()).isSelected());
+            });
             checkBoxContainer.getChildren().add(checkBox);
         }
 
@@ -47,7 +50,7 @@ public class CheckListWidget extends ScrollPane {
         HBox inputContainer = new HBox();
         inputContainer.setSpacing(10);
         TextField newCheckboxText = new TextField();
-        newCheckboxText.setPrefWidth(400);
+        newCheckboxText.setPrefWidth(450);
         Button addCheckbox = new Button("+");
         addCheckbox.setOnMouseClicked(event -> {
             checkBoxDataList.add(new CheckBoxData(newCheckboxText.getText(), false));
