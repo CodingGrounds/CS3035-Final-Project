@@ -12,12 +12,14 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 /**
  * Class representing the splash view containing navigation buttons
- *
  * @author Jason Cleveland
  */
 public class SplashView extends BorderPane {
 
     private List<Board> boards;
+
+    //TODO Make Existing list pretty | Bigger
+    //TODO Convert to having a controller
 
     public SplashView() {
         Label appTitle = new Label("Discount Trello");
@@ -29,7 +31,6 @@ public class SplashView extends BorderPane {
         setAlignment(newBoard, Pos.CENTER);
         newBoard.setPadding(new Insets(50,0,50,0));
 
-
         this.boards = Main.model.boardsProperty().get();
 
         newBoard.setOnMouseClicked(e -> {
@@ -39,37 +40,35 @@ public class SplashView extends BorderPane {
             Main.mainScene.setRoot(new BoardView(newModelBoard));
         });
 
-        // TODO: Center these
         VBox existingBoards = new VBox();
         existingBoards.setFillWidth(true);
         existingBoards.setAlignment(Pos.CENTER);
         Label existingBoardTitle = new Label("Existing Boards");
         existingBoardTitle.setAlignment(Pos.CENTER);
         existingBoardTitle.setStyle("-fx-font-size: 24px");
-        existingBoards.getChildren().add(existingBoardTitle);
 
         // Existing Boards
         ArrayList<Label> existingBoardList = new ArrayList<Label>();
 
-
         for(Board board: boards){
-            existingBoardList.add(new Label(board.getName()));
+            Label label = new Label(board.getName());
+
+            label.setOnMouseClicked(event->{
+                System.out.println("Label Click on Board " + board.getName());
+                Main.mainScene.setRoot(new BoardView(board));
+            });
+
+            existingBoardList.add(label);
         }
 
-        // TODO: SQL query to fetch any saved boards
+        existingBoards.getChildren().add(existingBoardTitle);
+        existingBoards.getChildren().addAll(existingBoardList);
 
-        // Suggestion: SELECT query will return rows, iterate through those rows
-        // and create a new Label (or other element) for each
 
-        // NOTE: when these elements are clicked on, they need to load our application.model
-        // with their information that was stored in the DB (# of cols, cards in each col)
-
-        // If no saved boards, add default message
         if (existingBoardList.size() == 0) {
             Label defaultMsg = new Label("No existing boards");
             existingBoards.getChildren().add(defaultMsg);
         }
-        // TODO: End todo
 
         ScrollPane existingBoardsContainer = new ScrollPane();
         existingBoardsContainer.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);

@@ -33,7 +33,7 @@ public class Column {
   /**
    * Name of the application.Column
    */
-  private transient SimpleStringProperty name;
+  private SimpleStringProperty name;
 
   /**
    * List of cards per application.Column
