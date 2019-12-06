@@ -1,5 +1,6 @@
 package application;
 
+import application.model.InteractiveModel;
 import application.model.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 public class Main extends Application {
 
   public static final Model model = new Model();
+  public static final InteractiveModel interactiveModel = new InteractiveModel();
   public static final SplashView splashView = new SplashView();
   public static final Controller controller = new Controller();
 
@@ -27,6 +29,8 @@ public class Main extends Application {
     try {
       // Set scene
       mainScene = new Scene(splashView, 800, 600);
+
+
 
       primaryStage.setTitle("Work in Progress");
       primaryStage.setScene(mainScene);

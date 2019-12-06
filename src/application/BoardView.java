@@ -11,6 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.javafx.IconFontFX;
+import jiconfont.javafx.IconNode;
 
 /**
  * Class representing the board view containing columns and cards
@@ -46,7 +50,6 @@ public class BoardView extends BorderPane {
     save.setOnAction(e -> {
       Main.model.saveBoards();
       e.consume();
-      // TODO: SQL to save board to database
     });
 
     MenuItem exit = new MenuItem("Exit");
@@ -57,14 +60,14 @@ public class BoardView extends BorderPane {
 
     MenuItem help = new MenuItem("Help");
     help.setOnAction(e -> {
+      Main.mainScene.setRoot(new HelpView());
       e.consume();
-      // TODO: help menu option triggered
     });
 
     MenuItem about = new MenuItem("About");
     about.setOnAction(e -> {
+	  Main.mainScene.setRoot(new AboutView());
       e.consume();
-      // TODO: about menu option triggered
     });
 
     MenuBar menuBar = new MenuBar();
@@ -100,11 +103,23 @@ public class BoardView extends BorderPane {
     addColumnContainer.setPadding(new Insets(20));
     addColumnContainer.setAlignment(Pos.CENTER);
     addColumnContainer.setMinWidth(50);
-    Label addColumn = new Label("+");
+
+    IconFontFX.register(FontAwesome.getIconFont());
+
+    IconNode iconNode = new IconNode(FontAwesome.PLUS_CIRCLE);
+    iconNode.setIconSize(30);
+    iconNode.setFill(Color.DODGERBLUE);
+
+    Label addColumn = new Label();
+    addColumn.setGraphic(iconNode);
+
+    addColumn.setStyle("-fx-cursor: hand;");
+
     addColumn.setOnMouseClicked(event -> {
       board.columnsListProperty().add(new Column("2"));
       draw();
     });
+
     addColumnContainer.getChildren().add(addColumn);
     columnsContainer.getChildren().add(addColumnContainer);
 
