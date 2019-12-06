@@ -119,6 +119,10 @@ public class CardDetailView extends BorderPane {
     }
 
     private void saveCard() {
+        // A type and title must be present to save a card
+        if (selectedCardType == null || (titleInput.getText() != null && titleInput.getText().isEmpty())) {
+            return;
+        }
         switch (selectedCardType) {
             case BUG:
                 newCard = new Bug(
