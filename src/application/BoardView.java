@@ -50,7 +50,6 @@ public class BoardView extends BorderPane {
     save.setOnAction(e -> {
       Main.model.saveBoards();
       e.consume();
-      // TODO: SQL to save board to database
     });
 
     MenuItem exit = new MenuItem("Exit");
@@ -61,14 +60,14 @@ public class BoardView extends BorderPane {
 
     MenuItem help = new MenuItem("Help");
     help.setOnAction(e -> {
+      Main.mainScene.setRoot(new HelpView());
       e.consume();
-      // TODO: help menu option triggered
     });
 
     MenuItem about = new MenuItem("About");
     about.setOnAction(e -> {
+	  Main.mainScene.setRoot(new AboutView());
       e.consume();
-      // TODO: about menu option triggered
     });
 
     MenuBar menuBar = new MenuBar();
