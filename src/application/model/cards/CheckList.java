@@ -1,5 +1,6 @@
 package application.model.cards;
 
+import application.model.CheckBoxData;
 import db.cards.CheckListData;
 import java.util.List;
 import javafx.beans.property.SimpleListProperty;
@@ -8,19 +9,19 @@ import javafx.collections.ObservableList;
 
 public class CheckList extends Card {
 
-  private SimpleListProperty<String> checkList;
+  private SimpleListProperty<CheckBoxData> checkList;
 
-  public CheckList(String title, String description, List<String> list) {
+  public CheckList(String title, String description, List<CheckBoxData> list) {
     super(title, description);
-    ObservableList<String> observableList = FXCollections.observableArrayList(list);
+    ObservableList<CheckBoxData> observableList = FXCollections.observableArrayList(list);
     this.checkList = new SimpleListProperty<>(observableList);
   }
 
-  public SimpleListProperty<String> checkListProperty() {
+  public SimpleListProperty<CheckBoxData> checkListProperty() {
     return this.checkList;
   }
 
-  public void setCheckList(List<String> checkList) {
+  public void setCheckList(List<CheckBoxData> checkList) {
     this.checkList.clear();
     this.checkList.addAll(checkList);
   }

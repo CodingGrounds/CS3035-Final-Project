@@ -2,7 +2,6 @@ package application;
 
 import application.model.Board;
 import application.model.Column;
-import application.model.cards.Bug;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -63,7 +62,7 @@ public class ColumnView extends ScrollPane {
         addCard.setStyle("-fx-cursor: hand;");
 
         addCard.setOnMouseClicked(event -> {
-            column.cardsProperty().add(new Bug("Bug", "New Bug", "1 2 3"));
+            Main.mainScene.setRoot(new CardDetailView(board, column));
             draw();
 
         });

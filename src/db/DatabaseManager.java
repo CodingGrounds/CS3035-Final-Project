@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import application.model.Board;
+import application.model.CheckBoxData;
 import application.model.Column;
 import application.model.cards.Bug;
 import application.model.cards.Card;
@@ -183,9 +184,9 @@ public class DatabaseManager {
 //
 //    List<CardData> cardsData = new ArrayList<>();
 
-    List<String> strings = new ArrayList<>();
-    strings.add("check1");
-    strings.add("check2");
+    List<CheckBoxData> strings = new ArrayList<>();
+    strings.add(new CheckBoxData("check1", true));
+    strings.add(new CheckBoxData("check2", false));
 
 //    columnDatas.add(new ColumnData("Jeff", cardsData));
 ////    cardsData.add(new BugData("Bug", "crap", "1 2 3 "));
