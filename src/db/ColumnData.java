@@ -46,19 +46,15 @@ public class ColumnData implements Serializable {
     List<CardData> cardDatas = new ArrayList<>();
     for(Card card: input.cardsProperty()){
       if(card instanceof Bug){
-        System.out.println("Bug Class");
         cardDatas.add(BugData.convertToBugData((Bug)card));
       }
       else if(card instanceof CheckList){
-        System.out.println("CheckList Class");
         cardDatas.add(CheckListData.convertToCheckListData((CheckList)card));
       }
       else if(card instanceof Event){
-        System.out.println("Event Class");
         cardDatas.add(EventData.convertToEventData((Event) card));
       }
       else if(card instanceof Story){
-        System.out.println("Story Class");
         cardDatas.add(StoryData.convertToStoryData((Story) card));
       }
     }
