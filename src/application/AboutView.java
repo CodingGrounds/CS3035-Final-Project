@@ -19,7 +19,7 @@ public class AboutView extends Pane {
 		
 		Image img;
 		ImageView imgView = new ImageView();
-		img = new Image("application/resources/wip.png");
+		img = new Image("application/resources/logo.png");
 		imgView.setImage(img);
 		imgView.setPreserveRatio(true);
 		imgView.setFitHeight(300);
